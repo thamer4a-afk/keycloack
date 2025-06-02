@@ -1,33 +1,36 @@
-# Use the official Keycloak 24.0.3 image
 FROM quay.io/keycloak/keycloak:24.0.3
 
-# Set admin credentials for Keycloak
+# Admin credentials
 ENV KEYCLOAK_ADMIN=admin
 ENV KEYCLOAK_ADMIN_PASSWORD=admin
 
-# Configure database connection
+# Database configuration
 ENV KC_DB=postgres
 ENV KC_DB_URL=jdbc:postgresql://dpg-d0urvsndiees73aeqec0-a:5432/pfe_db_3kt9
 ENV KC_DB_USERNAME=pfe_db_3kt9_user
 ENV KC_DB_PASSWORD=lYXVHTn6iufg8qZhze7xMRQHHUd2iIrJ
 
-# Configure Keycloak networking and proxy settings
+# Keycloak proxy & networking
 ENV KC_PROXY=edge
-ENV KC_HTTP_HOST=0.0.0.0
 ENV KC_HTTP_ENABLED=true
+ENV KC_HTTP_HOST=0.0.0.0              # Listen on all interfaces
 
-# Enable health checks and metrics
+# Remove KC_HOSTNAME for now (auto-detect)
+# ENV KC_HOSTNAME=0.0.0.0  ❌  # REMOVE THIS LINE
+ENV KC_HOSTNAME_STRICT=false
+ENV KC_HOSTNAME_STRICT_HTTPS=false
+
+# Optional relative path
+# ENV KC_HTTP_RELATIVE_PATH=/auth
+
+# Enable health and metrics
 ENV KC_HEALTH_ENABLED=true
 ENV KC_METRICS_ENABLED=true
 
-# Java options (IPv4 preference)
+# Java options
 ENV JAVA_OPTS_APPEND=-Djava.net.preferIPv4Stack=true
 
-# Set hostname to avoid strict hostname resolution error in Render
-ENV KC_HOSTNAME=0.0.0.0
-
-# Expose port 8080 (HTTP)
+# Expose Keycloak HTTP port
 EXPOSE 8080
 
-# Start Keycloak in production mode with the configured port
 ENTRYPOINT ["/opt/keycloak/bin/kc.sh", "start", "--http-port=8080"]
