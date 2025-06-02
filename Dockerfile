@@ -10,13 +10,6 @@ ENV KC_DB_URL=jdbc:postgresql://dpg-d0urvsndiees73aeqec0-a:5432/pfe_db_3kt9
 ENV KC_DB_USERNAME=pfe_db_3kt9_user
 ENV KC_DB_PASSWORD=lYXVHTn6iufg8qZhze7xMRQHHUd2iIrJ
 
-# Enable health and metrics endpoints
-ENV KC_HEALTH_ENABLED=true
-ENV KC_METRICS_ENABLED=true
-ENV KC_HTTP_ENABLED=true
-
-# Optional JVM settings
-ENV JAVA_OPTS_APPEND=-Djava.net.preferIPv4Stack=true
 
 # Expose Keycloak port
 EXPOSE 8080
