@@ -12,21 +12,22 @@ ENV KC_DB_PASSWORD=lYXVHTn6iufg8qZhze7xMRQHHUd2iIrJ
 
 # Configure Keycloak networking and proxy settings
 ENV KC_PROXY=edge
-ENV KC_HTTP_HOST=0.0.0.0
 ENV KC_HTTP_ENABLED=true
+ENV KC_HOSTNAME_STRICT=false
+ENV KC_HOSTNAME_STRICT_HTTPS=false
 
 # Enable health checks and metrics
 ENV KC_HEALTH_ENABLED=true
 ENV KC_METRICS_ENABLED=true
 
 # Java options (IPv4 preference)
-ENV JAVA_OPTS_APPEND=-Djava.net.preferIPv4Stack=true
+ENV JAVA_OPTS_APPEND="-Djava.net.preferIPv4Stack=true -Djboss.as.management.blocking.timeout=3600"
 
-# Set hostname to avoid strict hostname resolution error in Render
-ENV KC_HOSTNAME=0.0.0.0
+# Set hostname to your actual domain or remove if using IP only
+# ENV KC_HOSTNAME=yourdomain.com
 
-# Expose port 8080 (HTTP)
+# Expose ports
 EXPOSE 8080
 
-# Start Keycloak in production mode with the configured port
+# Start Keycloak in production mode
 ENTRYPOINT ["/opt/keycloak/bin/kc.sh", "start", "--http-port=8080"]
