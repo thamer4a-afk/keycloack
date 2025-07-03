@@ -6,7 +6,7 @@ ENV KEYCLOAK_ADMIN_PASSWORD=admin
 
 # Configure database connection
 ENV KC_DB=postgre_3a7h
-ENV KC_DB_URL=jdbc:KC_DB_URL=jdbc:postgresql://dpg-d1iml7ali9vc73dds19g-a.oregon-postgres.render.com:5432/postgre_3a7h
+ENV KC_DB_URL=jdbc:postgresql://dpg-d1iml7ali9vc73dds19g-a.oregon-postgres.render.com:5432/postgre_3a7h
 ENV KC_DB_USERNAME=postgre_3a7h_user
 ENV KC_DB_PASSWORD=Ky4ukEijnQbUz1psG36tyDCyJ8q1oC67
 
